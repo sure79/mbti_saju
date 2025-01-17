@@ -1,393 +1,692 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<!-- HEAD 태그 안에 추가할 Google Fonts 링크 -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTI로 보는 수비학</title>
-    <style>
-   body {
-    background-color: #f3f4f6;
-    font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    word-break: keep-all;
-}
-
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI로 보는 수비학사주</title>
+  <style>
+    body {
+      background-color: #f3f4f6;
+      font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      word-break: keep-all;
+    }
     .container {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 20px;
-        animation: fadeIn 0.5s ease-in;
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      animation: fadeIn 0.5s ease-in;
     }
-
     .card {
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        padding: 40px;
-        transition: transform 0.3s ease;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      padding: 40px;
+      transition: transform 0.3s ease;
     }
-
     .card:hover {
-        transform: translateY(-2px);
+      transform: translateY(-2px);
     }
-
-.title {
-    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-    text-align: center;
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: #4338ca;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    letter-spacing: -0.5px;
-}
-
+    .title {
+      font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #4338ca;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      letter-spacing: -0.5px;
+    }
     .input-group {
-        margin-bottom: 35px;
+      margin-bottom: 35px;
     }
-
-    select {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid #e5e7eb;
-        border-radius: 12px;
-        font-size: 16px;
-        margin-bottom: 20px;
-        background-color: #fff;
-        cursor: pointer;
-        transition: all 0.3s ease;
+    label {
+      display: block;
+      font-weight: 500;
+      margin: 6px 0 4px;
     }
-
-    select:hover {
-        border-color: #8b5cf6;
+    input, select {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      background-color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
-
-    select:focus {
-        outline: none;
-        border-color: #6d28d9;
-        box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
+    input:hover, select:hover {
+      border-color: #8b5cf6;
     }
-
+    input:focus, select:focus {
+      outline: none;
+      border-color: #6d28d9;
+      box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
+    }
     button {
-        width: 100%;
-        background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-        color: white;
-        border: none;
-        padding: 16px 24px;
-        border-radius: 12px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+      width: 100%;
+      background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+      color: white;
+      border: none;
+      padding: 16px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-
     button:hover {
-        background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(109, 40, 217, 0.2);
+      background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(109, 40, 217, 0.2);
     }
-
-   result {
-    font-family: 'Poppins', sans-serif;
-    font-size: 40px;
-    font-weight: 700;
-    text-align: center;
-    color: #4c1d95;
-    margin: 25px 0;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-.highlight {
-    color: #6d28d9;
-    font-weight: 500;
-}
-
+    #result {
+      margin-top: 30px;
+      background: #f8f7ff;
+      border-radius: 12px;
+      padding: 24px;
+      display: none;
+    }
     .section {
-        background: white;
-        border-radius: 12px;
-        padding: 25px;
-        margin-bottom: 25px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-        transition: transform 0.3s ease;
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+      transition: transform 0.3s ease;
     }
-
     .section:hover {
-        transform: translateY(-2px);
+      transform: translateY(-2px);
     }
-
-.section h3 {
-    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-    color: #4338ca;
-    margin-bottom: 20px;
-    font-size: 22px;
-    font-weight: 700;
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 12px;
-    letter-spacing: -0.5px;
-}
-
- .number-tag {
-    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-    display: inline-block;
-    background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 100%);
-    padding: 8px 16px;
-    border-radius: 25px;
-    margin: 6px;
-    font-size: 15px;
-    color: #5b21b6;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    letter-spacing: -0.2px;
-}
-
+    .section h3 {
+      font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+      color: #4338ca;
+      margin-bottom: 20px;
+      font-size: 22px;
+      font-weight: 700;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .number-tag {
+      font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+      display: inline-block;
+      background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 100%);
+      padding: 8px 16px;
+      border-radius: 25px;
+      margin: 6px;
+      font-size: 15px;
+      color: #5b21b6;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      letter-spacing: -0.2px;
+    }
     .number-tag:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-
-.characteristic {
-    background: #f9fafb;
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    line-height: 1.8;
-    border-left: 4px solid #8b5cf6;
-    transition: all 0.3s ease;
-    font-size: 16px;
-    letter-spacing: -0.3px;
-    font-weight: 400;
-}
-
+    .characteristic {
+      background: #f9fafb;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      line-height: 1.8;
+      border-left: 4px solid #8b5cf6;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+      font-weight: 400;
+    }
     .characteristic:hover {
-        background: #f3f4f6;
-        transform: translateX(5px);
+      background: #f3f4f6;
+      transform: translateX(5px);
     }
-
+    .social-buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .social-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      gap: 8px;
+    }
+    .shop-button {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
+      color: white;
+    }
+    .instagram-button {
+      background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);
+      color: white;
+    }
+    .kakao-button {
+      background: #FEE500;
+      color: #000000;
+    }
+    .social-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* 반응형 디자인 */
     @media (max-width: 768px) {
-        .container {
-            padding: 15px;
-            margin: 15px auto;
-        }
-
-        .card {
-            padding: 25px;
-        }
-
-        .title {
-            font-size: 24px;
-        }
-
-        .section {
-            padding: 20px;
-        }
+      .container {
+        padding: 15px;
+        margin: 15px auto;
+      }
+      .card {
+        padding: 25px;
+      }
+      .title {
+        font-size: 24px;
+      }
+      .section {
+        padding: 20px;
+      }
     }
-
-    /* 스크롤바 커스터마이징 */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #8b5cf6;
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #7c3aed;
-    }
-
-
-.social-buttons {
-    margin-top: 40px;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.social-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    gap: 8px;
-}
-
-.shop-button {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
-    color: white;
-}
-
-.instagram-button {
-    background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);
-    color: white;
-}
-
-.kakao-button {
-    background: #FEE500;
-    color: #000000;
-}
-
-.social-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-</style>
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h1 class="title">MBTI로 보는 수비학사주</h1>
-            
-            <div class="input-group">
-                <select id="mbtiSelect">
-                    <option value="">MBTI 선택</option>
-                    <option value="ISTJ">ISTJ</option>
-                    <option value="ISFJ">ISFJ</option>
-                    <option value="INFJ">INFJ</option>
-                    <option value="INTJ">INTJ</option>
-                    <option value="ISTP">ISTP</option>
-                    <option value="ISFP">ISFP</option>
-                    <option value="INFP">INFP</option>
-                    <option value="INTP">INTP</option>
-                    <option value="ESTP">ESTP</option>
-                    <option value="ESFP">ESFP</option>
-                    <option value="ENFP">ENFP</option>
-                    <option value="ENTP">ENTP</option>
-                    <option value="ESTJ">ESTJ</option>
-                    <option value="ESFJ">ESFJ</option>
-                    <option value="ENFJ">ENFJ</option>
-                    <option value="ENTJ">ENTJ</option>
-                </select>
-                <button onclick="analyzeMBTI()">분석하기</button>
-            </div>
+<div class="container">
+  <div class="card">
+    <h1 class="title">MBTI로 보는 수비학사주</h1>
+    
+    <!-- 1) 이름/생년월일 입력 (단순 입력만 받음) -->
+    <div class="input-group">
+      <label>이름</label>
+      <input type="text" id="userName" placeholder="예: 홍길동">
+      
+      <label>생년 (YYYY)</label>
+      <input type="number" id="birthYear" placeholder="예: 1990">
 
-            <div id="result"></div>
-        </div>
+      <label>생월 (MM)</label>
+      <input type="number" id="birthMonth" placeholder="1~12">
+
+      <label>생일 (DD)</label>
+      <input type="number" id="birthDay" placeholder="1~31">
     </div>
 
-    <script>
-        // MBTI -> 연관된 숫자, 특성, 한 줄 설명
-        const mbtiNumberMap = {
-            'ISTJ': {
-                numbers: [0, 8, 13],
-                characteristics: ['책임감', '규율', '체계성'],
-                description: '광대(0), 힘(8), 죽음(13)과 연관되는 ISTJ 유형은 책임감 있고 체계적입니다.'
-            },
-            'ISFJ': {
-                numbers: [2, 5, 8],
-                characteristics: ['신중함', '배려', '안정성'],
-                description: '여사제(2), 교황(5), 힘(8)의 숫자가 나타내는 차분하고 헌신적인 성향을 가지고 있습니다.'
-            },
-            'INFJ': {
-                numbers: [3, 9, 17],
-                characteristics: ['통찰력', '이상주의', '깊은 공감'],
-                description: '여황제(3), 은둔자(9), 별(17)을 상징하는 INFJ는 깊은 내면 성찰과 이상을 추구합니다.'
-            },
-            'INTJ': {
-                numbers: [5, 7, 8, 10],  // 예시
-                characteristics: ['분석력', '독립적', '전략성'],
-                description: '교황(5), 전차(7), 힘(8), 운명의 수레바퀴(10)와 연관된 INTJ는 체계적 사고와 독립적인 성향을 지닙니다.'
-            },
-            'ISTP': {
-                numbers: [1, 7, 12],
-                characteristics: ['실용주의', '탐구심', '즉흥력'],
-                description: '마법사(1), 전차(7), 매달린 사람(12) 조합으로 빠른 판단과 실용적 접근을 보입니다.'
-            },
-            'ISFP': {
-                numbers: [3, 6, 9],
-                characteristics: ['온화함', '예술감각', '순간의 감정'],
-                description: '여황제(3), 연인(6), 은둔자(9) 조합으로, 순간의 감정을 예술적으로 표현하는 편입니다.'
-            },
-            'INFP': {
-                numbers: [0, 9, 10],
-                characteristics: ['이상주의', '내면탐구', '공감력'],
-                description: '광대(0), 은둔자(9), 운명의 수레바퀴(10) 조합으로, 이상과 내면 세계를 중시합니다.'
-            },
-            'INTP': {
-                numbers: [1, 11, 12],
-                characteristics: ['논리성', '독립적', '분석적'],
-                description: '마법사(1), 정의(11), 매달린 사람(12)의 조합. 지식 탐구와 논리를 최우선으로 둡니다.'
-            },
-            'ESTP': {
-                numbers: [7, 15, 19],
-                characteristics: ['현실감각', '모험심', '즉흥성'],
-                description: '전차(7), 악마(15), 태양(19)이 보여주는 활달하고 자유로운 에너지로, 도전을 즐기는 편입니다.'
-            },
-            'ESFP': {
-                numbers: [6, 10, 19],
-                characteristics: ['사교성', '자유로움', '즐거움'],
-                description: '연인(6), 운명의 수레바퀴(10), 태양(19) 조합으로, 사람들과 즐거움을 나누는 성격입니다.'
-            },
-            'ENFP': {
-                numbers: [3, 17, 20],
-                characteristics: ['열정', '창의력', '호기심'],
-                description: '여황제(3), 별(17), 심판(20) 조합으로, 열정적이고 새로운 아이디어를 탐색합니다.'
-            },
-            'ENTP': {
-                numbers: [5, 8, 16],
-                characteristics: ['토론', '혁신', '유연함'],
-                description: '교황(5), 힘(8), 탑(16) 조합으로, 논쟁이나 혁신을 즐기며 상황을 유연하게 해석합니다.'
-            },
-            'ESTJ': {
-                numbers: [4, 8, 16],
-                characteristics: ['조직력', '실행력', '통제력'],
-                description: '황제(4), 힘(8), 탑(16) 조합으로, 조직적이고 강인한 리더십을 발휘합니다.'
-            },
-            'ESFJ': {
-                numbers: [3, 6, 14],
-                characteristics: ['화합', '관계중시', '돌봄'],
-                description: '여황제(3), 연인(6), 절제(14) 조합으로, 주변 사람을 잘 챙기며 따뜻하게 대합니다.'
-            },
-            'ENFJ': {
-                numbers: [3, 4, 10],
-                characteristics: ['리더십', '영향력', '카리스마'],
-                description: '여황제(3), 황제(4), 운명의 수레바퀴(10)의 숫자가 나타내는 카리스마 있는 리더십입니다.'
-            },
-            'ENTJ': {
-                numbers: [4, 7, 11],
-                characteristics: ['리더십', '추진력', '판단력'],
-                description: '황제(4), 전차(7), 정의(11)의 조합으로, 강력한 리더십과 추진력을 갖춘 유형입니다.'
-            }
-        };
+    <!-- 2) MBTI 선택 -->
+    <div class="input-group">
+      <label>MBTI</label>
+      <select id="mbtiSelect">
+        <option value="">MBTI 선택</option>
+        <option value="ISTJ">ISTJ</option>
+        <option value="ISFJ">ISFJ</option>
+        <option value="INFJ">INFJ</option>
+        <option value="INTJ">INTJ</option>
+        <option value="ISTP">ISTP</option>
+        <option value="ISFP">ISFP</option>
+        <option value="INFP">INFP</option>
+        <option value="INTP">INTP</option>
+        <option value="ESTP">ESTP</option>
+        <option value="ESFP">ESFP</option>
+        <option value="ENFP">ENFP</option>
+        <option value="ENTP">ENTP</option>
+        <option value="ESTJ">ESTJ</option>
+        <option value="ESFJ">ESFJ</option>
+        <option value="ENFJ">ENFJ</option>
+        <option value="ENTJ">ENTJ</option>
+      </select>
 
-        // 0~21번 (사주풀이) => 풍부한 해석 (tarotData를 numberMeanings로 활용)
-        const numberMeanings = {
-  0: `0번 광대(The Fool): 
+      <button onclick="analyzeAll()">분석하기</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+</div>
+
+<!-- 소셜 버튼들 -->
+<div class="social-buttons">
+  <a href="https://niceple.com/" target="_blank" class="social-button shop-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <path d="M16 10a4 4 0 0 1-8 0"></path>
+    </svg>
+    수비학자사몰
+  </a>
+  
+  <a href="https://www.instagram.com/niceple_tarot/" target="_blank" class="social-button instagram-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+    Instagram
+  </a>
+  
+  <a href="https://pf.kakao.com/_Cgxcdn" target="_blank" class="social-button kakao-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7
+               8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1
+               -.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5
+               a8.48 8.48 0 0 1 8 8v.5z"></path>
+    </svg>
+    카카오톡 채널
+  </a>
+</div>
+
+<script>
+//-------------------------------------------
+// (1) tarotAnalysis: 재물/애정/건강/진로/시험 분석
+//-------------------------------------------
+const tarotAnalysis = {
+  getMoneyFortune: (number) => {
+      const moneyAnalysis = {
+          0: "지출이 많고 준비가 부족한 상태. 여가비에 과소비 주의 필요.",
+          1: "기술과 재능으로 하나를 둘로 만들 수 있음. 꾸준한 노력 필요.",
+          2: "환경에 따라 재물 변동성 있음. 부동산 투자 권장.",
+          3: "넘어져도 돈을 줍는 형국. 노력한 만큼 재물 들어옴. 사치 주의.",
+          4: "노력한 만큼 부와 명예 얻음. 횡재운도 있으나 불안감 주의.",
+          5: "티끌 모아 태산형. 큰 투자보다 안정적 저축 권장.",
+          6: "귀인을 통해 재물 들어오나 과소비 주의.",
+          7: "노력한 만큼 재물 커짐. 무리한 확장은 피해야 함.",
+          8: "한땀한땀 모으는 타입. 무리한 투자 손실 위험.",
+          9: "말년에 재물운 상승. 안정 자산 권장.",
+          10: "수입 많고 지출 많음. 계획적 저축 필수.",
+          11: "계획적으로 차근차근 모음. 돈거래 시 신중.",
+          12: "돈 들어와도 샐 수 있음. 지인 금전거래 비추.",
+          13: "크게 벌 수도 있으나 복불복. 바닥 위험도 있음.",
+          14: "서서히 쌓이는 재물 패턴. 조급함 버리기.",
+          15: "큰 돈 벌 수 있으나 위험한 거래 주의.",
+          16: "대박 or 쪽박. 안정적 방식 권장.",
+          17: "수입·지출 빈번. 재물관리 필요.",
+          18: "겉보기와 달리 재물 문제 가능. 안전 수입원 필요.",
+          19: "횡재수나 상속 운. 과도한 투기는 금물.",
+          20: "노력만큼 서서히 재물 증가. 시간 필요.",
+          21: "재물 순환 원활. 주변 도움 많음."
+      };
+      return moneyAnalysis[number] || "해당 번호의 재물운 해석이 없습니다.";
+  },
+
+  getLoveFortune: (number) => {
+      const loveAnalysis = {
+          0: "구속 싫어하는 자유연애. 재미있으나 길지 않을 수도.",
+          1: "마음먹은 상대는 얻으나, 일회성 바람기 주의.",
+          2: "쉽게 마음 열지 않음. 신중한 연애.",
+          3: "매력적이고 인기 많음. 집착은 금물.",
+          4: "안정 추구. 감정표현 서툴러 답답할 수도.",
+          5: "지배적 사랑 가능. 일방 희생 주의.",
+          6: "자유연애 지향. 바람기 주의.",
+          7: "정열적이고 리드하는 스타일. 일회성 연애 경계.",
+          8: "지고지순하나 집착 조심.",
+          9: "고독한 사랑, 외사랑 경향.",
+          10: "운명적 만남 가능성. 긍정적 연애운.",
+          11: "쉽게 속내 안 드러냄. 신중한 스타일.",
+          12: "헌신적이나 쉽게 지침.",
+          13: "급작스런 이별·새 시작 반복.",
+          14: "이성·감정 균형 잡힌 사랑. 헌신적.",
+          15: "강한 매력·집착 공존. 위험한 사랑.",
+          16: "갑작스런 이별·관계 파탄 가능.",
+          17: "지고지순한 사랑. 임신 운도 좋음.",
+          18: "복잡한 연애나 스캔들 주의.",
+          19: "낙관적 사랑. 결실 풍성 가능.",
+          20: "과거인연 재회 가능. 시간이 해결사.",
+          21: "이상적 파트너십. 완벽 커플 형성."
+      };
+      return loveAnalysis[number] || "해당 번호의 애정운 해석이 없습니다.";
+  },
+
+  getHealthFortune: (number) => {
+      const healthAnalysis = {
+          0: "건망증, 우울증, 신경성 질환, 탈모, 골절 주의.",
+          1: "머리·혈액순환·알레르기·피부염 조심.",
+          2: "밝혀내기 어려운 질병, 신경성 질환 주의.",
+          3: "목·유방·자궁·갑상선·화병 주의.",
+          4: "심장·고혈압·당뇨·허리·스트레스성 질환.",
+          5: "기관지·어깨·팔 통증·목 디스크 주의.",
+          6: "장 약함·신경성 질환·허리통증 주의.",
+          7: "신장·방광·전립선·근육통·면역저하 주의.",
+          8: "치아·턱관절·심장·혈압·관절 주의.",
+          9: "소화장애·눈·귀질환·우울증·면역력 약화.",
+          10: "혈액순환·수족냉증·순환기 질환 주의.",
+          11: "안과질환·어깨·팔 통증·신장질환 주의.",
+          12: "뼈·발목·허리·위장 약함. 소화기능 저하.",
+          13: "면역력 저하·만성질환·수술 가능성.",
+          14: "순환기·호흡기 질환·스트레스 관리 필요.",
+          15: "불면증·신경쇠약·중독성 질환 주의.",
+          16: "관절·부상·뇌질환·사고 조심.",
+          17: "안과·자궁질환·순환기 계통 주의.",
+          18: "위장·우울증·불면증·여성질환 주의.",
+          19: "눈·심장·호흡기·피부 질환 조심.",
+          20: "입·치아·호흡기·정신적 스트레스 주의.",
+          21: "전반적 건강 좋으나 과로 주의."
+      };
+      return healthAnalysis[number] || "해당 번호의 건강운 해석이 없습니다.";
+  },
+
+  getCareerFortune: (number) => {
+      const careerAnalysis = {
+          0: "자유분방 직업·예술·프리랜서 적합.",
+          1: "기술직·엔지니어·연구원·의사 계열 유리.",
+          2: "교육·연구·상담·비서 계열 적합.",
+          3: "예술·디자인·미용·부동산 분야 유리.",
+          4: "경영·관리·법조·공직 분야 적합.",
+          5: "교육·종교·상담·중개업 분야 유리.",
+          6: "예술·패션·미용·서비스 계열 적합.",
+          7: "운송·무역·해외 관련 업종 유리.",
+          8: "공무원·법조·안전 관리직 적합.",
+          9: "연구·교육·의료·상담 분야 유리.",
+          10: "변화 많은 직종·다방면 경험.",
+          11: "법률·회계·분석가 계열 적합.",
+          12: "심리·연구·사회복지 분야 유리.",
+          13: "의료·수술·정치 등 결단 필요한 직종.",
+          14: "관리·중개·조정자 역할 유리.",
+          15: "영업·예술·유흥 분야 적합.",
+          16: "건설·부동산·개발 분야 유리.",
+          17: "예술·디자인·컨텐츠 제작 적합.",
+          18: "건축·점성·예술 분야 유리.",
+          19: "교육·광고·마케팅 분야 적합.",
+          20: "방송·공연·온라인 분야 유리.",
+          21: "국제 무역·외교·예술 분야 적합."
+      };
+      return careerAnalysis[number] || "해당 번호의 진로운 해석이 없습니다.";
+  },
+
+  getExamFortune: (number) => {
+      const examAnalysis = {
+          0: "현재보다 더 노력 필요. 기대는 반으로.",
+          1: "노력한 만큼 좋은 결과 기대 가능.",
+          2: "차분히 준비하면 합격 가능성 높음.",
+          3: "노력 대비 좋은 성과 기대 가능.",
+          4: "성취욕 강해 목표 달성 가능성 높음.",
+          5: "꾸준 노력으로 성과 달성 가능.",
+          6: "집중력·목표의식 있으면 합격 가능.",
+          7: "목표 확실하면 빠른 성취 가능.",
+          8: "두 배 노력으로 큰 성공 가능.",
+          9: "욕심 부리지 않으면 긍정적 결과.",
+          10: "자만심 경계하며 준비하면 성공.",
+          11: "차근차근 준비하면 좋은 결과.",
+          12: "더 많은 노력·인내 필요.",
+          13: "노력·기대 불일치 가능성.",
+          14: "욕심 버리면 좋은 결과.",
+          15: "불안정 컨디션 조절 필요.",
+          16: "어려운 시험은 다음 기회.",
+          17: "자만 없이 준비하면 성공.",
+          18: "심리적 불안 극복 관건.",
+          19: "열심히 하면 반드시 좋은 결과.",
+          20: "꾸준 노력의 성과 있을 것.",
+          21: "완벽 준비로 고득점 기대."
+      };
+      return examAnalysis[number] || "해당 번호의 시험운 해석이 없습니다.";
+  }
+};
+
+//-------------------------------------------
+// (2) MBTI + 사주풀이(0~21) + 기타
+//-------------------------------------------
+const mbtiNumberMap = {
+  'ISTJ': {
+        numbers: [0, 8, 13],
+        characteristics: ['책임감', '규율', '체계성'],
+        description: '신중하고 체계적인 성향으로 안정적인 성장이 기대됩니다.',
+        specialFortune: {
+            money: '계획적인 재테크가 힘을 발휘하는 시기입니다.',
+            career: '꾸준한 노력이 인정받을 수 있습니다.',
+            health: '규칙적인 생활습관이 건강을 좌우합니다.',
+            relationship: '신뢰를 바탕으로 한 관계가 발전합니다.',
+            love: '진중한 만남이 기대되는 시기입니다.'
+        }
+    },
+    'ISFJ': {
+        numbers: [2, 5, 8],
+        characteristics: ['배려심', '헌신적', '보수적'],
+        description: '타인을 향한 따뜻한 마음이 행운을 가져올 것입니다.',
+        specialFortune: {
+            money: '안정적인 저축과 투자가 좋은 결실을 맺습니다.',
+            career: '꾸준함이 인정받아 승진운이 있습니다.',
+            health: '스트레스 관리에 특별한 주의가 필요합니다.',
+            relationship: '오래된 인연과의 유대가 깊어집니다.',
+            love: '안정적이고 깊이 있는 관계가 형성됩니다.'
+        }
+    },
+    'INFJ': {
+        numbers: [3, 9, 17],
+        characteristics: ['통찰력', '이상주의', '창의성'],
+        description: '직관적 능력으로 새로운 기회를 발견할 수 있습니다.',
+        specialFortune: {
+            money: '예술적 재능을 통한 수익 창출이 기대됩니다.',
+            career: '창의적 프로젝트에서 빛을 발할 것입니다.',
+            health: '명상과 요가가 도움이 될 것입니다.',
+            relationship: '깊이 있는 대화가 인연을 이어줍니다.',
+            love: '영혼의 파트너를 만날 수 있는 시기입니다.'
+        }
+    },
+    'INTJ': {
+        numbers: [5, 7, 8, 10],
+        characteristics: ['전략적', '독립적', '혁신적'],
+        description: '전략적 사고로 큰 성과를 이룰 수 있는 해입니다.',
+        specialFortune: {
+            money: '장기 투자 전략이 성공을 가져옵니다.',
+            career: '혁신적인 아이디어가 높이 평가받습니다.',
+            health: '체계적인 건강관리가 중요합니다.',
+            relationship: '지적 교류가 있는 관계가 발전합니다.',
+            love: '이성적이면서도 깊은 사랑이 시작됩니다.'
+        }
+    },
+    'ISTP': {
+        numbers: [1, 7, 12],
+        characteristics: ['분석력', '적응력', '실용성'],
+        description: '실용적 접근으로 문제를 해결하는 한 해가 될 것입니다.',
+        specialFortune: {
+            money: '기술 관련 투자에서 수익이 예상됩니다.',
+            career: '전문 기술을 통한 성과가 기대됩니다.',
+            health: '운동을 통한 스트레스 해소가 효과적입니다.',
+            relationship: '실제적인 도움을 주고받는 관계가 중요합니다.',
+            love: '자유로운 연애가 기대되는 시기입니다.'
+        }
+    },
+    'ISFP': {
+        numbers: [3, 6, 9],
+        characteristics: ['예술성', '감수성', '조화로움'],
+        description: '예술적 감각이 빛을 발하는 시기가 될 것입니다.',
+        specialFortune: {
+            money: '창의적 활동을 통한 수입이 증가합니다.',
+            career: '예술 관련 분야에서 기회가 옵니다.',
+            health: '감정 조절이 건강에 큰 영향을 미칩니다.',
+            relationship: '감성적인 교감이 깊어집니다.',
+            love: '로맨틱한 만남이 기다리고 있습니다.'
+        }
+    },
+    'INFP': {
+        numbers: [0, 9, 10],
+        characteristics: ['이상주의', '창의성', '공감능력'],
+        description: '내면의 성장과 창의적 표현이 돋보이는 해입니다.',
+        specialFortune: {
+            money: '가치 있는 일에 대한 투자가 성공합니다.',
+            career: '창작 활동에서 인정받을 수 있습니다.',
+            health: '정신 건강 관리가 특히 중요합니다.',
+            relationship: '진정성 있는 관계가 발전합니다.',
+            love: '이상적인 사랑이 현실이 될 수 있습니다.'
+        }
+    },
+    'INTP': {
+        numbers: [1, 11, 12],
+        characteristics: ['논리성', '창의성', '탐구심'],
+        description: '지적 호기심이 새로운 발견으로 이어질 것입니다.',
+        specialFortune: {
+            money: '혁신적인 투자 기회가 찾아옵니다.',
+            career: '연구 개발 분야에서 성과가 있습니다.',
+            health: '정신적 스트레스 관리가 필요합니다.',
+            relationship: '지적 대화가 있는 관계가 발전합니다.',
+            love: '독특한 매력으로 인연을 만납니다.'
+        }
+    },
+    'ESTP': {
+        numbers: [7, 15, 19],
+        characteristics: ['모험심', '현실감각', '순발력'],
+        description: '도전적인 시도가 좋은 결과를 가져올 것입니다.',
+        specialFortune: {
+            money: '과감한 투자가 성공으로 이어집니다.',
+            career: '영업 성과가 돋보이는 시기입니다.',
+            health: '활동적인 운동이 도움이 됩니다.',
+            relationship: '활발한 사교 활동이 행운을 가져옵니다.',
+            love: '열정적인 로맨스가 기대됩니다.'
+        }
+    },
+    'ESFP': {
+        numbers: [6, 10, 19],
+        characteristics: ['열정', '사교성', '낙관성'],
+        description: '밝은 에너지로 주변을 활기차게 만들 것입니다.',
+        specialFortune: {
+            money: '즐거운 활동을 통한 수익이 생깁니다.',
+            career: '대인 관계를 통한 기회가 많아집니다.',
+            health: '긍정적 마인드가 건강을 돕습니다.',
+            relationship: '새로운 인연들이 찾아옵니다.',
+            love: '즐거운 데이트가 가득한 시기입니다.'
+        }
+    },
+    'ENFP': {
+        numbers: [3, 17, 20],
+        characteristics: ['열정', '창의성', '영감'],
+        description: '새로운 가능성을 발견하고 성장하는 해가 될 것입니다.',
+        specialFortune: {
+            money: '창의적 프로젝트에서 수익이 발생합니다.',
+            career: '새로운 분야에서 성공할 기회가 있습니다.',
+            health: '정서적 안정이 중요한 시기입니다.',
+            relationship: '다양한 만남이 인생의 전환점이 됩니다.',
+            love: '운명적인 만남이 기다리고 있습니다.'
+        }
+    },
+    'ENTP': {
+        numbers: [5, 8, 16],
+        characteristics: ['혁신성', '논쟁력', '창의성'],
+        description: '독창적인 아이디어로 새로운 길을 열 것입니다.',
+        specialFortune: {
+            money: '혁신적인 사업 기회가 찾아옵니다.',
+            career: '창의적 제안이 높이 평가받습니다.',
+            health: '적절한 운동으로 에너지 관리가 필요합니다.',
+            relationship: '지적 자극이 있는 만남이 많아집니다.',
+            love: '흥미로운 연애가 시작될 수 있습니다.'
+        }
+    },
+    'ESTJ': {
+        numbers: [4, 8, 16],
+        characteristics: ['체계성', '리더십', '실용성'],
+        description: '조직력과 실행력으로 목표를 달성할 수 있습니다.',
+        specialFortune: {
+            money: '체계적인 재무 관리가 성과를 낼 것입니다.',
+            career: '리더십을 발휘할 기회가 많아집니다.',
+            health: '규칙적인 생활이 건강을 지킵니다.',
+            relationship: '업무적 인연이 좋은 결실을 맺습니다.',
+            love: '실속 있는 만남이 이어질 것입니다.'
+        }
+    },
+    'ESFJ': {
+        numbers: [3, 6, 14],
+        characteristics: ['친화력', '봉사정신', '책임감'],
+        description: '대인관계를 통해 좋은 기회를 얻을 수 있습니다.',
+        specialFortune: {
+            money: '인맥을 통한 재물운이 좋아집니다.',
+            career: '팀워크를 통한 성과가 돋보입니다.',
+            health: '주변인과의 운동이 효과적입니다.',
+            relationship: '풍부한 인간관계가 행운을 가져옵니다.',
+            love: '조화로운 연애가 기대됩니다.'
+        }
+    },
+    'ENFJ': {
+        numbers: [3, 4, 10],
+        characteristics: ['카리스마', '통찰력', '영향력'],
+        description: '리더십을 발휘하여 주변과 함께 성장할 것입니다.',
+        specialFortune: {
+            money: '사회적 활동을 통한 수익이 증가합니다.',
+            career: '조직 내 영향력이 커지는 시기입니다.',
+            health: '마음의 건강이 특히 중요합니다.',
+            relationship: '멘토 역할로 인연이 확장됩니다.',
+            love: '성숙한 사랑이 찾아올 것입니다.'
+        }
+    },
+    'ENTJ': {
+        numbers: [4, 7, 11],
+        characteristics: ['리더십', '전략적사고', '추진력'],
+        description: '강력한 추진력으로 큰 성과를 이룰 수 있습니다.',
+        specialFortune: {
+            money: '대규모 프로젝트에서 수익이 발생합니다.',
+            career: '중요한 의사결정자로 성장합니다.',
+            health: '적절한 휴식과 운동의 균형이 필요합니다.',
+            relationship: '전략적 인맥 관리가 중요합니다.',
+            love: '목표 지향적인 연애가 성공적입니다.'
+        }
+    }
+};
+
+        // 운세 카테고리별 상세 데이터
+        const fortuneDetails = {
+            money: {
+                title: '재물운',
+                aspects: ['수입', '지출', '투자', '재테크'],
+                getAdvice: (mbti) => {
+                    // MBTI별 맞춤 재물 조언
+                    const adviceMap = {
+                        'I': '신중한 투자가 행운을 가져올 것입니다.',
+                        'E': '적극적인 재테크 기회를 잡으세요.',
+                        'S': '현실적인 재물관리가 중요합니다.',
+                        'N': '창의적인 수입원을 찾을 수 있습니다.',
+                        'T': '논리적인 판단이 이득을 가져옵니다.',
+                        'F': '직관적인 투자가 성공할 수 있습니다.',
+                        'J': '계획적인 저축이 중요합니다.',
+                        'P': '유연한 자금 운용이 필요합니다.'
+                    };
+                    return [
+                        adviceMap[mbti[0]],
+                        adviceMap[mbti[1]],
+                        adviceMap[mbti[2]],
+                        adviceMap[mbti[3]]
+                    ];
+                }
+            },
+            career: {
+                title: '직업운',
+                aspects: ['성과', '승진', '이직', '학업'],
+                getAdvice: (mbti) => {
+                    // MBTI별 맞춤 경력 조언
+                    const adviceMap = {
+                        'I': '전문성 개발에 집중하세요.',
+                        'E': '네트워킹이 기회를 만듭니다.',
+                        'S': '실무능력이 빛을 발합니다.',
+                        'N': '창의적 접근이 인정받습니다.',
+                        'T': '논리적 문제해결력을 보여주세요.',
+                        'F': '팀워크로 성과를 만드세요.',
+                        'J': '체계적인 경력관리가 중요합니다.',
+                        'P': '유연한 대처능력이 강점입니다.'
+                    };
+                    return [
+                        adviceMap[mbti[0]],
+                        adviceMap[mbti[1]],
+                        adviceMap[mbti[2]],
+                        adviceMap[mbti[3]]
+                    ];
+                }
+};
+
+// 0~21번 풍부한 해석 (여기서는 일부 예시)
+const numberMeanings = {
+ 0: `0번 광대(The Fool): 
 이 카드는 자유롭고 순수한 영혼을 상징하며, 어떤 틀에도 얽매이지 않고 새로운 시작을 두려워하지 않는 특징을 보여줍니다. 그러나 때로는 주변 현실을 고려하지 않고 무모한 도전을 할 수 있어 위험에 처하기도 합니다. 준비가 부족한 상태에서 출발하기에 시행착오를 겪기도 하지만, 오히려 그 과정을 통해 더욱 자유롭고 창의적인 길을 발견하기도 합니다. 광대는 외부의 시선보다 자기 자신이 느끼는 즐거움과 가능성을 우선하며, 풍류와 예술적 감각을 좋아할 수도 있습니다. 주변 상황에 대해 둔감해 보이지만, 한편으로는 그만큼 마음의 제약이 적어 혁신과 모험에 기꺼이 뛰어듭니다. 다만 지나친 자유는 계획 부족으로 이어져 성취가 더디거나 실수를 반복할 위험이 있으므로, 어느 정도의 책임감과 현실 감각을 함께 가져야 합니다. 이 '광대 사주'는 처음에는 어려움이 많을 수 있으나, 순수한 열정과 열린 마음으로 다양한 경험을 쌓으면, 머지않아 자신만의 독특한 길을 개척할 수 있는 큰 잠재력을 지닌 사주로 해석됩니다.`,
 
   1: `1번 마법사(The Magician): 
@@ -451,95 +750,119 @@
 부활, 최후의 심판, 결정적 변화가 임박했음을 알리는 카드로, 사주풀이에서는 ‘이미 정해진 결과에 대한 결론’을 암시합니다. 한편, 과거 잘못이나 미련을 떨쳐내고 새로운 단계로 도약할 수도 있습니다. 의지가 강하고 말로 호감을 얻을 수 있는 커뮤니케이션 능력이 있지만, 이성과 감정 사이에서 갈팡질팡해 스스로 흔들릴 때도 있으니 주의가 필요합니다. 직업은 방송·공연·이벤트·음악·SNS·온라인 판매 등 대중을 상대로 한 활동에서 두각을 나타낼 수 있고, 고고학이나 역사연구처럼 ‘과거를 되짚어 미래를 도모하는’ 분야와도 맞습니다. 재물은 노력한 만큼 서서히 늘어나는 편이고, 현재 힘들어도 시간이 지나면 서서히 해결되는 흐름이 있습니다. 애정 면에서는 ‘한 번 헤어진 사람과 재회’하거나, 오랫동안 고생하다 결실을 보기도 하는 등 기복이 있을 수 있습니다. 시험·학업도 큰 욕심보다는 꾸준한 노력이 중요하며, 조급해하지 말고 자신감을 유지하면 좋은 결과가 있을 것입니다. 결국 심판 사주는 ‘스스로 내린 결론에 책임지고, 과거를 발판 삼아 새로운 길로 나아간다’는 메시지를 담고 있습니다.`,
 
   21: `21번 세계(The World):
-모든 사이클의 완성과 새로운 시작을 겸하는 카드입니다. 사주풀이로 보면 한 분야에서 뛰어난 재능을 펼쳐 인정을 받고, 삶의 중요한 목표를 달성할 가능성이 큽니다. 동시에 또 다른 도전을 향해 나아가는 ‘끝이자 또 다른 시작’이 특징입니다. 여행이나 외국 문화를 좋아해 통역·무역·외교·항공 분야 등과 잘 어울리며, 예술·패션·스타일리스트 계열에서도 매력을 발휘할 수 있습니다. 재물 운은 순환이 원활하고, 주위 도움도 많이 받으므로 큰 어려움 없이 자산이 모일 수 있으나, 자신만의 시야가 강해 때로는 고집을 부려 기회를 놓칠 수도 있습니다. 애정 면에서는 매력적이고 완성된 사랑을 지향해, 이상적인 커플을 만들기 쉬우나, 스스로 ‘나는 이미 완전하다’는 인식 때문에 상대와의 소통이 부족하면 문제가 생길 수 있습니다. 시험·학업은 완벽주의가 발동하면 꾸준히 하다 마지막에 좋은 성적을 얻을 수 있습니다. 이 세계 사주는 ‘인생의 한 단계가 마무리되었고, 새로 펼쳐질 또 다른 무대가 준비된다’는 의미이므로, 본인 재능을 충분히 펼치면서도 자만하지 않는 자세가 중요합니다.`        };
+모든 사이클의 완성과 새로운 시작을 겸하는 카드입니다. 사주풀이로 보면 한 분야에서 뛰어난 재능을 펼쳐 인정을 받고, 삶의 중요한 목표를 달성할 가능성이 큽니다. 동시에 또 다른 도전을 향해 나아가는 ‘끝이자 또 다른 시작’이 특징입니다. 여행이나 외국 문화를 좋아해 통역·무역·외교·항공 분야 등과 잘 어울리며, 예술·패션·스타일리스트 계열에서도 매력을 발휘할 수 있습니다. 재물 운은 순환이 원활하고, 주위 도움도 많이 받으므로 큰 어려움 없이 자산이 모일 수 있으나, 자신만의 시야가 강해 때로는 고집을 부려 기회를 놓칠 수도 있습니다. 애정 면에서는 매력적이고 완성된 사랑을 지향해, 이상적인 커플을 만들기 쉬우나, 스스로 ‘나는 이미 완전하다’는 인식 때문에 상대와의 소통이 부족하면 문제가 생길 수 있습니다. 시험·학업은 완벽주의가 발동하면 꾸준히 하다 마지막에 좋은 성적을 얻을 수 있습니다. 이 세계 사주는 ‘인생의 한 단계가 마무리되었고, 새로 펼쳐질 또 다른 무대가 준비된다’는 의미이므로, 본인 재능을 충분히 펼치면서도 자만하지 않는 자세가 중요합니다.`     
 
-        function analyzeMBTI() {
-            const mbti = document.getElementById('mbtiSelect').value;
-            const resultDiv = document.getElementById('result');
+};
 
-            if (!mbti) {
-                alert('MBTI를 선택해주세요.');
-                return;
-            }
+//--------------------------------------
+// (3) 생년월일로 숫자 뽑는 간단 로직
+//--------------------------------------
+function calcBirthNumber(y,m,d){
+  if(isNaN(y)||isNaN(m)||isNaN(d)) return -1;
+  let sum = y + m + d;
+  return sum % 22; // 0~21
+}
 
-            const analysis = mbtiNumberMap[mbti];
-            if(!analysis){
-                // 등록되지 않은 MBTI
-                resultDiv.innerHTML = `
-                  <div class="section">
-                    <h3>등록되지 않은 MBTI</h3>
-                    <p>현재 데이터에 ${mbti}에 대한 정보가 없습니다.</p>
-                  </div>
-                `;
-                resultDiv.style.display = 'block';
-                return;
-            }
+//--------------------------------------
+// (4) 이름으로 숫자 뽑기 (간단 예시)
+//--------------------------------------
+function calcNameNumber(nameStr){
+  if(!nameStr) return -1;
+  let sum=0;
+  for(let ch of nameStr){
+    sum += ch.charCodeAt(0);
+  }
+  return sum%22;
+}
 
-            // MBTI에서 정의된 numbers(예: [5,7,8,10])에 대해 numberMeanings에서 해석 찾기
-            let numberTagsHtml = analysis.numbers.map(num => `
-                <div class="number-tag">숫자 ${num}</div>
-            `).join('');
+//--------------------------------------
+// (5) 버튼 클릭 → 분석
+//--------------------------------------
+function analyzeAll(){
+  const name = document.getElementById('userName').value.trim();
+  const y = parseInt(document.getElementById('birthYear').value);
+  const m = parseInt(document.getElementById('birthMonth').value);
+  const d = parseInt(document.getElementById('birthDay').value);
+  const mbti = document.getElementById('mbtiSelect').value;
+  const resultDiv = document.getElementById('result');
 
-            let numberDetailsHtml = analysis.numbers.map(num => `
-                <div class="characteristic">
-                    <strong>${num}</strong><br>
-                    ${numberMeanings[num] || "(등록 안됨)"}
-                </div>
-            `).join('');
+  // 기본 검증
+  if(!name){
+    alert("이름을 입력하세요.");
+    return;
+  }
+  if(isNaN(y)||isNaN(m)||isNaN(d)){
+    alert("생년월일을 모두 입력하세요.");
+    return;
+  }
+  if(!mbti){
+    alert("MBTI를 선택하세요.");
+    return;
+  }
 
-            let charTagsHtml = analysis.characteristics.map(c => `
-                <div class="number-tag">${c}</div>
-            `).join('');
+  // 이름과 생년월일 → 0~21
+  let nameNum = calcNameNumber(name);
+  let birthNum= calcBirthNumber(y,m,d);
 
-            // 최종 HTML
-            resultDiv.innerHTML = `
-                <div class="section">
-                    <h3>${mbti} 유형의 수비학적 해석</h3>
-                    <p>${analysis.description}</p>
-                </div>
+  // MBTI 해석
+  let analysis = mbtiNumberMap[mbti];
+  if(!analysis){
+    // 미등록
+    resultDiv.innerHTML=`
+      <div class="section">
+        <h3>등록되지 않은 MBTI</h3>
+        <p>${mbti}에 대한 정보가 없습니다.</p>
+      </div>
+    `;
+    resultDiv.style.display = 'block';
+    return;
+  }
 
-                <div class="section">
-                    <h3>연관된 수비학 숫자</h3>
-                    ${numberTagsHtml}
-                    <div style="margin-top: 15px;">
-                        ${numberDetailsHtml}
-                    </div>
-                </div>
+  // MBTI numbers 표시
+  let mbtiNumbers = analysis.numbers;
+  let mbtiTags = mbtiNumbers.map(num=>`
+    <span class="number-tag">숫자 ${num}</span>
+  `).join('');
 
-                <div class="section">
-                    <h3>주요 특성</h3>
-                    ${charTagsHtml}
-                </div>
-            `;
+  let mbtiDetails = mbtiNumbers.map(num=>{
+    let meaning = numberMeanings[num]||"(해당 번호 해석 없음)";
+    return `
+    <div class="characteristic">
+      <strong>${num}</strong><br>
+      ${meaning}
+    </div>`;
+  }).join('');
 
-            resultDiv.style.display = 'block';
-        }
-    </script>
-<div class="social-buttons">
-    <a href="https://niceple.com/" target="_blank" class="social-button shop-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-        수비학자사몰
-    </a>
+  let charTags = analysis.characteristics.map(c=>`
+    <span class="number-tag">${c}</span>
+  `).join('');
+
+  // 이름 숫자 기반 운세
+  let moneyFortune = tarotAnalysis.getMoneyFortune(nameNum);
+  let loveFortune  = tarotAnalysis.getLoveFortune(nameNum);
+  let healthFortune= tarotAnalysis.getHealthFortune(nameNum);
+  let careerFortune= tarotAnalysis.getCareerFortune(nameNum);
+  let examFortune  = tarotAnalysis.getExamFortune(nameNum);
+
+  // 생년월일 숫자 해석
+  let birthMeaning = numberMeanings[birthNum]||"(출생숫자 해석 없음)";
+
+  // 결과 출력
+  resultDiv.innerHTML = `
+    <div class="section">
+      <h3>MBTI 해석 - ${mbti}</h3>
+      <p>${analysis.description}</p>
+      <h4>MBTI 연관 숫자</h4>
+      ${mbtiTags}
+      <div style="margin-top:15px;">${mbtiDetails}</div>
+      <h4>주요 특성</h4>
+      ${charTags}
+    </div>
+
     
-    <a href="https://www.instagram.com/niceple_tarot/" target="_blank" class="social-button instagram-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-        Instagram
-    </a>
-    
-    <a href="https://pf.kakao.com/_Cgxcdn" target="_blank" class="social-button kakao-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-        </svg>
-        카카오톡 채널
-    </a>
-</div>
+  `;
+  resultDiv.style.display = 'block';
+}
+</script>
 </body>
 </html>
